@@ -124,7 +124,7 @@ const args = process.argv.slice(2)
 
     // @Run.js
     removeDefault('Run') // Removes the default error message
-    mergeScript('Run', `exit(await spawn('node', ["dist/main.js", ...process.argv.slice(2)]))`)
+    mergeScript('Run', `exit(await spawn('node', ["bin/main.js", ...process.argv.slice(2)]))`)
 
     // @Release.js
     removeDefault('Release')
@@ -162,7 +162,8 @@ module.exports = {
             in this project to add command support.
         */
     },
-    gitIgnore: `.dccache
+    gitIgnore: `bin/
+.dccache
 # Logs
 logs
 *.log
