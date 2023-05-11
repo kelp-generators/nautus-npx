@@ -83,6 +83,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
         description,
         types: 'bin/main.d.ts',
         main: 'bin/main.js',
+        type: 'module',
         bin: {
 
         },
@@ -123,7 +124,7 @@ const args = process.argv.slice(2)
 
     // @Run.js
     removeDefault('Run') // Removes the default error message
-    mergeScript('Run', `exit(await spawn('node', ["dist/${main}", ...process.argv.slice(2)]))`)
+    mergeScript('Run', `exit(await spawn('node', ["dist/main.js", ...process.argv.slice(2)]))`)
 
     // @Release.js
     removeDefault('Release')
@@ -139,8 +140,12 @@ const args = process.argv.slice(2)
             module: 'ESNext',
             declaration: true,
             outDir: './bin',
-            strict: true
-        }
+            strict: true,
+            moduleResolution: 'nodenext'
+        },
+        include: [
+            './src/'
+        ]
     }, null, 4))
 
     // INFO
